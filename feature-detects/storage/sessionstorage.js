@@ -13,13 +13,17 @@ define(['Modernizr'], function( Modernizr ) {
   //   www.quirksmode.org/dom/html5.html
   // But IE8 doesn't support either with local files
   Modernizr.addTest('sessionstorage', function() {
-    var mod = 'modernizr';
     try {
-      sessionStorage.setItem(mod, mod);
-      sessionStorage.removeItem(mod);
-      return true;
+      return 'sessionStorage' in window && window.sessionStorage !== null;
     } catch(e) {
-      return false;
+      try {
+        var mod = 'modernizr';
+        sessionStorage.setItem(mod, mod);
+        sessionStorage.removeItem(mod);
+        return true;
+      } catch(e) {
+        return false;
+      }
     }
   });
 });

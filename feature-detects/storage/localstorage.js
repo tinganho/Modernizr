@@ -36,13 +36,17 @@ define(['Modernizr'], function( Modernizr ) {
   // But IE8 doesn't support either with local files
 
   Modernizr.addTest('localstorage', function() {
-    var mod = 'modernizr';
     try {
-      localStorage.setItem(mod, mod);
-      localStorage.removeItem(mod);
-      return true;
+      return 'localStorage' in window && window.localStorage !== null;
     } catch(e) {
-      return false;
+      try {
+        var mod = 'modernizr';
+        localStorage.setItem(mod, mod);
+        localStorage.removeItem(mod);
+        return true;
+      } catch(e) {
+        return false;
+      }
     }
   });
 });
