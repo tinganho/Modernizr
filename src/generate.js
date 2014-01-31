@@ -38,6 +38,9 @@ define(['underscore'], function( _ ) {
     }
 
     output += ') {\n' +
+    '  // Get cache from localStorage\n' +
+    '  Modernizr._cache = Modernizr.getCache();\n' +
+    '\n' +
     '  // Run each test\n' +
     '  testRunner();\n' +
     '\n';

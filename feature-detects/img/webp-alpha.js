@@ -25,6 +25,8 @@ Tests for transparent webp support.
 */
 define(['Modernizr', 'addTest'], function( Modernizr, addTest ) {
   Modernizr.addAsyncTest(function(){
+    // Profiling
+    console.time('webpalpha');
     var image = new Image();
 
     image.onerror = function() {

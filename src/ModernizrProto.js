@@ -8,8 +8,13 @@ define(['tests'], function ( tests ) {
     _config: {
       classPrefix : '',
       enableClasses : true,
-      usePrefixes : true
+      usePrefixes : true,
+      localStorageName : 'modernizr_cache',
+      parentJSONPointer : '__parent__'
     },
+
+    // Localstorage cache
+    _cache : {},
 
     // Queue of tests
     _q: [],
@@ -34,6 +39,19 @@ define(['tests'], function ( tests ) {
 
     addAsyncTest: function (fn) {
       tests.push({name : null, fn : fn});
+    },
+
+    getCache : function() {
+      try {
+        var cache = JSON.parse(localStorage.getItem(Modernizr._config.localStorageName));
+        return cache === null ? {} : cache;
+      } catch(e) {
+        return {};
+      }
+    },
+
+    setCache : function() {
+      localStorage.setItem(Modernizr._config.localStorageName, JSON.stringify(Modernizr._cache));
     }
   };
 

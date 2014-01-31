@@ -32,6 +32,8 @@ define(['Modernizr', 'createElement', 'test/webgl'], function( Modernizr, create
 
   // Not Async but handles it's own self
   Modernizr.addAsyncTest(function() {
+    // Profiling
+    console.time('webglextensions');
     /* jshint -W053 */
 
     // Not a good candidate for css classes, so we avoid addTest stuff

@@ -25,6 +25,9 @@ Modernizr.datauri.over32kb  // false in IE8
 define(['Modernizr', 'addTest'], function( Modernizr, addTest ) {
   // https://github.com/Modernizr/Modernizr/issues/14
   Modernizr.addAsyncTest(function() {
+    // Profiling
+    console.time('datauri');
+
     /* jshint -W053 */
 
     // IE7 throw a mixed content warning on HTTPS for this test, so we'll

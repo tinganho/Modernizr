@@ -22,6 +22,8 @@ Tests for animated webp support.
 */
 define(['Modernizr', 'addTest'], function( Modernizr, addTest ) {
   Modernizr.addAsyncTest(function(){
+    // Profiling
+    console.time('webpanimation');
     var image = new Image();
 
     image.onerror = function() {

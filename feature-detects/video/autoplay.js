@@ -15,6 +15,9 @@ Checks for support of the autoplay attribute of the video element.
 define(['Modernizr', 'addTest', 'docElement', 'createElement', 'test/video'], function( Modernizr, addTest, docElement, createElement ) {
 
   Modernizr.addAsyncTest(function() {
+    // Profiling
+    console.time('videoautoplay');
+
     var timeout;
     var waitTime = 300;
     var elem = createElement('video');

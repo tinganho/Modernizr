@@ -19,6 +19,9 @@ Test for JPEG XR support
 define(['Modernizr', 'addTest'], function( Modernizr, addTest ) {
 
   Modernizr.addAsyncTest(function() {
+    // Profiling
+    console.time('jpegxr');
+
     var image = new Image();
 
     image.onload = image.onerror = function() {

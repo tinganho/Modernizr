@@ -17,6 +17,9 @@ Test for animated png support.
 */
 define(['Modernizr', 'createElement', 'addTest', 'test/canvas'], function( Modernizr, createElement, addTest ) {
   Modernizr.addAsyncTest(function () {
+    // Profiling
+    console.time('apng');
+
     if (!Modernizr.canvas) {
       return false;
     }

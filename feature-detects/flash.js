@@ -13,6 +13,9 @@
 */
 define(['Modernizr', 'createElement', 'docElement', 'addTest'], function( Modernizr, createElement, docElement, addTest ) {
   Modernizr.addAsyncTest(function() {
+    // Profiling
+    console.time('flash');
+
     /* jshint -W053 */
     var runTest = function(result, embed) {
       var bool = !!result;

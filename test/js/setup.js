@@ -17,9 +17,9 @@ window.TEST = {
   inputs    : ['input','inputtypes', 'textarea'],
   audvid    : ['video','audio', 'webglextensions'],
   columns   : ['csscolumns'],
-  API       : ['addTest', 'mq', 'hasEvent', 'testProp', 'testAllProps', 'testStyles', '_prefixes', '_domPrefixes', '_cssomPrefixes', 'prefixed'],
+  API       : ['addTest', 'mq', 'hasEvent', 'testProp', 'testAllProps', 'testStyles', '_prefixes', '_domPrefixes', '_cssomPrefixes', 'prefixed', 'getCache', 'setCache'],
   extraclass: ['js'],
-  privates  : ['_enableHTML5','_version','_fontfaceready'],
+  privates  : ['_enableHTML5','_version','_fontfaceready', '_cache'],
   deprecated : [
                 { oldish : 'crosswindowmessaging', newish : 'postmessage'},
                 { oldish : 'historymanagement', newish : 'history'}

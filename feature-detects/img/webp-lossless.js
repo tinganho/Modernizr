@@ -21,6 +21,9 @@ Tests for non-alpha lossless webp support.
 */
 define(['Modernizr', 'addTest'], function( Modernizr, addTest ) {
   Modernizr.addAsyncTest(function(){
+    // Profiling
+    console.time('webplossless');
+
     var image = new Image();
 
     image.onerror = function() {

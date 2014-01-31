@@ -16,6 +16,9 @@ define(['Modernizr', 'addTest'], function( Modernizr, addTest ) {
   // Assumes data URI support, but according to caniuse every browser which
   // supports SVG in an <img> also supports data URIs
   Modernizr.addAsyncTest(function () {
+    // Profiling
+    console.time('svgasimg');
+
     var img = new Image();
 
     img.onerror = function () {

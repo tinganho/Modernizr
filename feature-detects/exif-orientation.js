@@ -27,6 +27,9 @@ define(['Modernizr', 'addTest'], function( Modernizr, addTest ) {
   //    crbug.com/56845 (looks incomplete)
   //    webk.it/19688 (available upstream but its up all ports to turn on individually)
   Modernizr.addAsyncTest(function() {
+    // Profiling
+    console.time('exiforientation');
+
     var img = new Image();
 
     img.onerror = function() {

@@ -36,8 +36,12 @@
 !*/
 define(['Modernizr', 'prefixes', 'createElement', 'testAllProps', 'addTest'], function( Modernizr, prefixes, createElement, testAllProps, addTest ) {
 
+  var waitTime = 300;
+
   Modernizr.addAsyncTest(function() {
-    var waitTime = 300;
+    // Profiling
+    console.time('csshyphens');
+
     setTimeout(runHyphenTest, waitTime);
     // Wait 1000ms so we can hope for document.body
     function runHyphenTest() {
@@ -45,7 +49,6 @@ define(['Modernizr', 'prefixes', 'createElement', 'testAllProps', 'addTest'], fu
         setTimeout(runHyphenTest, waitTime);
         return;
       }
-
       // functional test of adding hyphens:auto
       function test_hyphens_css() {
         try {
@@ -85,8 +88,35 @@ define(['Modernizr', 'prefixes', 'createElement', 'testAllProps', 'addTest'], fu
           return false;
         }
       }
+    }
 
-      // for the softhyphens test
+    addTest('csshyphens', function() {
+
+      if (!testAllProps('hyphens', 'auto', true)) return false;
+
+      /* Chrome lies about its hyphens support so we need a more robust test
+         crbug.com/107111
+         */
+      try {
+        return test_hyphens_css();
+      } catch(e) {
+        return false;
+      }
+    });
+  });
+
+  Modernizr.addAsyncTest(function() {
+    // Profiling
+    console.time('softhyphens');
+
+    setTimeout(runHyphenTest, waitTime);
+    // Wait 1000ms so we can hope for document.body
+    function runHyphenTest() {
+      if (!document.body && !document.getElementsByTagName('body')[0]) {
+        setTimeout(runHyphenTest, waitTime);
+        return;
+      }
+
       function test_hyphens( delimiter, testWidth ) {
         try {
           /* create a div container and a span within that
@@ -136,6 +166,30 @@ define(['Modernizr', 'prefixes', 'createElement', 'testAllProps', 'addTest'], fu
         } catch(e) {
           return false;
         }
+      }
+
+      addTest('softhyphens', function() {
+        try {
+          // use numeric entity instead of &shy; in case it's XHTML
+          return test_hyphens('&#173;', true) && test_hyphens('&#8203;', false);
+        } catch(e) {
+          return false;
+        }
+      });
+    };
+  });
+
+  Modernizr.addAsyncTest(function() {
+
+    //Profiling
+    console.time('softhyphensfind');
+
+    setTimeout(runHyphenTest, waitTime);
+    // Wait 1000ms so we can hope for document.body
+    function runHyphenTest() {
+      if (!document.body && !document.getElementsByTagName('body')[0]) {
+        setTimeout(runHyphenTest, waitTime);
+        return;
       }
 
       // testing if in-browser Find functionality will work on hyphenated text
@@ -192,29 +246,6 @@ define(['Modernizr', 'prefixes', 'createElement', 'testAllProps', 'addTest'], fu
         }
       }
 
-      addTest('csshyphens', function() {
-
-        if (!testAllProps('hyphens', 'auto', true)) return false;
-
-        /* Chrome lies about its hyphens support so we need a more robust test
-           crbug.com/107111
-           */
-        try {
-          return test_hyphens_css();
-        } catch(e) {
-          return false;
-        }
-      });
-
-      addTest('softhyphens', function() {
-        try {
-          // use numeric entity instead of &shy; in case it's XHTML
-          return test_hyphens('&#173;', true) && test_hyphens('&#8203;', false);
-        } catch(e) {
-          return false;
-        }
-      });
-
       addTest('softhyphensfind', function() {
         try {
           return test_hyphens_find('&#173;') && test_hyphens_find('&#8203;');
@@ -222,7 +253,6 @@ define(['Modernizr', 'prefixes', 'createElement', 'testAllProps', 'addTest'], fu
           return false;
         }
       });
-
     }
   });
 });

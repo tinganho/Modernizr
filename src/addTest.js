@@ -67,6 +67,7 @@ define(['ModernizrProto', 'Modernizr', 'hasOwnProp', 'setClasses'], function( Mo
       var featureSplit = feature.split('.');
       var last = Modernizr[featureSplit[0]];
 
+
       // Again, we don't check for parent test existence. Get that right, though.
       if (featureSplit.length == 2) {
         last = last[featureSplit[1]];
@@ -81,14 +82,20 @@ define(['ModernizrProto', 'Modernizr', 'hasOwnProp', 'setClasses'], function( Mo
         return Modernizr;
       }
 
-      test = typeof test == 'function' ? test() : test;
+      if(featureSplit[0] in Modernizr._cache) {
+        test = Modernizr._cache[featureSplit[0]];
+      } else {
+        test = typeof test == 'function' ? test() : test;
+      }
 
       // Set the value (this is the magic, right here).
       if (featureSplit.length == 1) {
         Modernizr[featureSplit[0]] = test;
+        Modernizr._cache[featureSplit[0]] = test;
       }
       else if (featureSplit.length == 2) {
         Modernizr[featureSplit[0]][featureSplit[1]] = test;
+        Modernizr._cache[featureSplit[0]][featureSplit[1]] = test;
       }
 
       // Set a single class (either `feature` or `no-feature`)
@@ -97,6 +104,7 @@ define(['ModernizrProto', 'Modernizr', 'hasOwnProp', 'setClasses'], function( Mo
       // Trigger the event
       Modernizr._trigger(feature, test);
     }
+    console.timeEnd(feature);
 
     return Modernizr; // allow chaining.
   }

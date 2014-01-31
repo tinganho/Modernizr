@@ -18,6 +18,9 @@ Tests for lossy, non-alpha webp support.
 */
 define(['Modernizr', 'addTest'], function( Modernizr, addTest ) {
   Modernizr.addAsyncTest(function(){
+    // Profiling
+    console.time('webp');
+
     var image = new Image();
 
     image.onerror = function() {
